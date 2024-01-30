@@ -1,0 +1,8 @@
+caddy:80 {
+	reverse_proxy httpbin:80
+}
+
+caddy:443 {
+	reverse_proxy httpbin:80
+	tls internal
+}

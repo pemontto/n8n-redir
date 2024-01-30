@@ -1,0 +1,582 @@
+{
+    "meta": {
+        "instanceId": "f29565a7f803dc8b2f5aea5a1eb33a54f3ccfa29654d0d9a2949ad48234373ed"
+    },
+    "nodes": [
+        {
+            "parameters": {},
+            "id": "45fff05d-7aab-4b92-8787-df348213407e",
+            "name": "When clicking \"Test workflow\"",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [
+                820,
+                960
+            ]
+        },
+        {
+            "parameters": {
+                "url": "http://httpbin/anything",
+                "options": {}
+            },
+            "id": "03d3fb84-e4bd-4a5d-85bb-6f4ec5953857",
+            "name": "httpbin",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                240
+            ],
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "http://caddy/anything",
+                "options": {}
+            },
+            "id": "48828340-e16e-451e-a0f3-e60cd542d59b",
+            "name": "caddy http",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1260,
+                240
+            ],
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "https://caddy/anything",
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "id": "66006cd3-56ea-4633-b63b-f5573e41179d",
+            "name": "caddy https",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1460,
+                240
+            ],
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "http://caddy/redirect-to",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "http://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "4b990944-305e-4e0f-a4f0-a634bd26b926",
+            "name": "http redirect to anything",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                420
+            ],
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "https://caddy/redirect-to",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "http://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "id": "f392b575-038c-4826-a5e5-a21071a7b9fe",
+            "name": "https redirect to anything",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1260,
+                420
+            ],
+            "disabled": true
+        },
+        {
+            "parameters": {
+                "url": "http://caddy/redirect-to",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "http://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "d1b4daff-b8df-491b-bf9a-4940d564bb28",
+            "name": "http auth redirect to anything",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                960
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "https://caddy/redirect-to",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "https://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "id": "81c7efce-5990-4c41-a898-1c395f9d0ee1",
+            "name": "https auth redirect to anything",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                1140
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "errorMessage": "No Auth Header"
+            },
+            "id": "b177e4b3-cd63-4abc-a4fc-a74b660694c3",
+            "name": "Stop and Error",
+            "type": "n8n-nodes-base.stopAndError",
+            "typeVersion": 1,
+            "position": [
+                1680,
+                960
+            ]
+        },
+        {
+            "parameters": {
+                "url": "http://caddy/redirect-to",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "http://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {
+                    "redirect": {
+                        "redirect": {
+                            "followRedirects": false
+                        }
+                    },
+                    "response": {
+                        "response": {
+                            "fullResponse": true,
+                            "neverError": true
+                        }
+                    }
+                }
+            },
+            "id": "7a326d9f-e864-420c-be46-d886e11e5b31",
+            "name": "http auth redirect manual",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                600
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "https://caddy/redirect-to",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "https://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {
+                    "allowUnauthorizedCerts": true,
+                    "redirect": {
+                        "redirect": {
+                            "followRedirects": false
+                        }
+                    },
+                    "response": {
+                        "response": {
+                            "fullResponse": true,
+                            "neverError": true
+                        }
+                    }
+                }
+            },
+            "id": "a27a5300-ada3-4950-8cc8-1575d483e8b4",
+            "name": "https auth redirect manual",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                780
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "={{ $json.headers.location }}",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "options": {}
+            },
+            "id": "891d3d51-e348-4fb9-8342-e1eae3f22605",
+            "name": "http auth get",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1260,
+                600
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "={{ $json.headers.location }}",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "id": "dc28ce3f-ce87-4110-983b-300263198dc3",
+            "name": "https auth get",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1260,
+                780
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "http://caddy/relative-redirect/5",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "sendQuery": true,
+                "queryParameters": {
+                    "parameters": [
+                        {
+                            "name": "url",
+                            "value": "http://caddy/anything"
+                        }
+                    ]
+                },
+                "options": {}
+            },
+            "id": "264d8387-698c-4c3e-a4dc-dbcacd30354a",
+            "name": "http auth rel redirect",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                1320
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "url": "https://caddy/relative-redirect/5",
+                "authentication": "genericCredentialType",
+                "genericAuthType": "httpBasicAuth",
+                "options": {
+                    "allowUnauthorizedCerts": true
+                }
+            },
+            "id": "28645047-dd07-405c-ac49-ec887e0a1fc2",
+            "name": "https auth rel redirect",
+            "type": "n8n-nodes-base.httpRequest",
+            "typeVersion": 4.1,
+            "position": [
+                1060,
+                1480
+            ],
+            "credentials": {
+                "httpBasicAuth": {
+                    "id": "KteyvUAyiLxf7QKB",
+                    "name": "Unnamed credential"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "string": [
+                        {
+                            "value1": "={{ Object.keys($json.headers) }}",
+                            "operation": "notContains",
+                            "value2": "Auth"
+                        }
+                    ]
+                }
+            },
+            "id": "84251a7a-bece-4427-8b19-f9b5b9c8b5fd",
+            "name": "Auth Header was Sent",
+            "type": "n8n-nodes-base.filter",
+            "typeVersion": 1,
+            "position": [
+                1480,
+                960
+            ]
+        }
+    ],
+    "connections": {
+        "When clicking \"Test workflow\"": {
+            "main": [
+                [
+                    {
+                        "node": "httpbin",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "http redirect to anything",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "http auth redirect to anything",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "http auth redirect manual",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "https auth redirect manual",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "https auth redirect to anything",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "http auth rel redirect",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "https auth rel redirect",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "httpbin": {
+            "main": [
+                [
+                    {
+                        "node": "caddy http",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "caddy http": {
+            "main": [
+                [
+                    {
+                        "node": "caddy https",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "http redirect to anything": {
+            "main": [
+                [
+                    {
+                        "node": "https redirect to anything",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "http auth redirect to anything": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "https auth redirect to anything": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "http auth redirect manual": {
+            "main": [
+                [
+                    {
+                        "node": "http auth get",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "https auth redirect manual": {
+            "main": [
+                [
+                    {
+                        "node": "https auth get",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "http auth get": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "https auth get": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "http auth rel redirect": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "https auth rel redirect": {
+            "main": [
+                [
+                    {
+                        "node": "Auth Header was Sent",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Auth Header was Sent": {
+            "main": [
+                [
+                    {
+                        "node": "Stop and Error",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {}
+}

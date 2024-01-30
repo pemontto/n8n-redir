@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  n8n:
+    # image: n8nio/n8n:1.22.4 # doesn't add auth to redirects
+    image: n8nio/n8n:1.18.4 # Adds auth to redirects ✅
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    networks:
+      - n8n-network
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+    environment:
+      - N8N_DEPLOYMENT_TYPE=n8n-internal
+      - N8N_DIAGNOSTICS_CONFIG_BACKEND=
+      - N8N_DIAGNOSTICS_CONFIG_FRONTEND=
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PAYLOAD_SIZE_MAX=200
+      - N8N_TEMPLATES_ENABLED=false
+      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
+
+  httpbin:
+    image: kennethreitz/httpbin
+    container_name: httpbin
+    networks:
+      - n8n-network
+
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    command: caddy run --config /etc/caddy/Caddyfile --adapter caddyfile --watch
+    networks:
+      - n8n-network
+
+networks:
+  n8n-network:
+
